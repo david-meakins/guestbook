@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Comment
 {
     #[ORM\Id]
@@ -91,16 +92,10 @@ class Comment
         return $this;
     }
 
-    public function getText2(): ?string
+    #[ORM\PrePersist]
+    public function setCreatedAtValue()
     {
-        return $this->text2;
-    }
-
-    public function setText2(string $text2): self
-    {
-        $this->text2 = $text2;
-
-        return $this;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getConference(): ?Conference
