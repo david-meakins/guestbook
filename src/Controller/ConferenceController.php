@@ -66,7 +66,7 @@ class ConferenceController extends AbstractController
             ];
             $spamScore = $spamChecker->getSpamScore($comment, $context);
             $logger->info('Comment spam score: ' . $spamScore);
-            if (1 === $spamScore) {
+            if (2 == $spamScore) {
                 throw new \RuntimeException('Blatant spam, go away!');
             }
 
