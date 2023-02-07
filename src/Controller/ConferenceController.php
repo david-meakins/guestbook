@@ -68,8 +68,6 @@ class ConferenceController extends AbstractController
             ];
             $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
 
-            $this->entityManager->flush();
-
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
         }
 
